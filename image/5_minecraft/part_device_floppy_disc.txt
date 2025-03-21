@@ -1,1 +1,0 @@
-part device floppy disc

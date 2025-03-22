@@ -10,3 +10,4 @@ from ./scripts/setup_dataset import get_dataset
 __all__ = ['start_web', 'install_dependencies', 'train', 'generate_image', 'get_dataset']
 
 
+# mohehehehhahaha

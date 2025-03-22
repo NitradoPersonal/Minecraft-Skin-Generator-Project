@@ -10,7 +10,7 @@ import shutil
 # ORE THE TRAINING DATA
 
 #path="/home/kaggle/data/mcskin"
-def setup_dataset():
+def get_dataset():
     alxmamaev_minecraft_skins_path = kagglehub.dataset_download('alxmamaev/minecraft-skins')
     return alxmamaev_minecraft_skins_path
 #os.makedirs("/home/kaggle/data/mcskin/", exist_ok=True, mode=0o7)

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Minecraft Skin Generator</title>
+                <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+                    </head>
+                    <body class="bg-gray-900 text-white">
+                        <div class="container mx-auto p-4">
+                                <h1 class="text-4xl font-bold text-center mb-8">Minecraft Skin Generator</h1>
+                                        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                                                    <div class="flex flex-col space-y-4">
+                                                                    <input type="text" id="prompt" placeholder="Enter a prompt (e.g., 'a Minecraft skin with a red cape')" class="p-2 rounded bg-gray-700 text-white">
+                                                                                    <button id="generate-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                                                                                        <i class="fas fa-magic"></i> Generate Skin
+                                                                                                                        </button>
+                                                                                                                                    </div>
+                                                                                                                                                <div id="output" class="mt-6">
+                                                                                                                                                                <!-- Generated image will appear here -->
+                                                                                                                                                                            </div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                        </div>
+
+                                                                                                                                                                                            <script>
+                                                                                                                                                                                                    document.getElementById("generate-btn").addEventListener("click", async () => {
+                                                                                                                                                                                                                const prompt = document.getElementById("prompt").value;
+                                                                                                                                                                                                                            const outputDiv = document.getElementById("output");
+
+                                                                                                                                                                                                                                        outputDiv.innerHTML = "<p class='text-gray-400'>Generating... <i class='fas fa-spinner fa-spin'></i></p>";
+
+                                                                                                                                                                                                                                                    // Send the prompt to the backend
+                                                                                                                                                                                                                                                                const response = await fetch("/generate", {
+                                                                                                                                                                                                                                                                                method: "POST",
+                                                                                                                                                                                                                                                                                                headers: { "Content-Type": "application/json" },
+                                                                                                                                                                                                                                                                                                                body: JSON.stringify({ prompt }),
+                                                                                                                                                                                                                                                                                                                            });
+
+                                                                                                                                                                                                                                                                                                                                        const data = await response.json();
+                                                                                                                                                                                                                                                                                                                                                    if (data.image_url) {
+                                                                                                                                                                                                                                                                                                                                                                    outputDiv.innerHTML = `<img src="${data.image_url}" alt="Generated Skin" class="rounded-lg shadow-lg">`;
+                                                                                                                                                                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                                                                                                                                                                                outputDiv.innerHTML = `<p class="text-red-500">Error: ${data.error}</p>`;
+                                                                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                                                                    });
+                                                                                                                                                                                                                                                                                                                                                                                                                        </script>
+                                                                                                                                                                                                                                                                                                                                                                                                                        </body>
+                                                                                                                                                                                                                                                                                                                                                                                                                        </html>

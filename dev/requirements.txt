@@ -1,0 +1,7 @@
+flask
+requests
+beautifulsoup4
+pillow
+transformers
+torch
+kohya-trainer
